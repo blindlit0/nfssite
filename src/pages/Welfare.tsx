@@ -99,7 +99,7 @@ function Welfare() {
     return base
   }, [posts])
 
-  function CategoryChip({ value, active, onClick, label, count }: { value: Category | 'all'; active: boolean; onClick: () => void; label: string; count?: number }) {
+  function CategoryChip({ active, onClick, label, count }: { active: boolean; onClick: () => void; label: string; count?: number }) {
     return (
       <button type="button" className={`chip ${active ? 'active' : ''}`} onClick={onClick} aria-pressed={active}>
         <span>{label}</span>
@@ -119,10 +119,10 @@ function Welfare() {
         <div className="grid" style={{ gap: '0.9rem' }}>
           <div>
             <div className="chips" role="group" aria-label="Category">
-              <CategoryChip value="financial" label="Financial" active={category==='financial'} onClick={() => setCategory('financial')} />
-              <CategoryChip value="emotional" label="Emotional" active={category==='emotional'} onClick={() => setCategory('emotional')} />
-              <CategoryChip value="academical" label="Academical" active={category==='academical'} onClick={() => setCategory('academical')} />
-              <CategoryChip value="personal" label="Personal" active={category==='personal'} onClick={() => setCategory('personal')} />
+              <CategoryChip label="Financial" active={category==='financial'} onClick={() => setCategory('financial')} />
+              <CategoryChip label="Emotional" active={category==='emotional'} onClick={() => setCategory('emotional')} />
+              <CategoryChip label="Academical" active={category==='academical'} onClick={() => setCategory('academical')} />
+              <CategoryChip label="Personal" active={category==='personal'} onClick={() => setCategory('personal')} />
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -145,11 +145,11 @@ function Welfare() {
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', margin: '1rem 0' }}>
         <div className="chips" role="group" aria-label="Filter">
-          <CategoryChip value="all" label="All" active={filter==='all'} onClick={() => setFilter('all')} count={posts.length} />
-          <CategoryChip value="financial" label="Financial" active={filter==='financial'} onClick={() => setFilter('financial')} count={counts.financial} />
-          <CategoryChip value="emotional" label="Emotional" active={filter==='emotional'} onClick={() => setFilter('emotional')} count={counts.emotional} />
-          <CategoryChip value="academical" label="Academical" active={filter==='academical'} onClick={() => setFilter('academical')} count={counts.academical} />
-          <CategoryChip value="personal" label="Personal" active={filter==='personal'} onClick={() => setFilter('personal')} count={counts.personal} />
+          <CategoryChip label="All" active={filter==='all'} onClick={() => setFilter('all')} count={posts.length} />
+          <CategoryChip label="Financial" active={filter==='financial'} onClick={() => setFilter('financial')} count={counts.financial} />
+          <CategoryChip label="Emotional" active={filter==='emotional'} onClick={() => setFilter('emotional')} count={counts.emotional} />
+          <CategoryChip label="Academical" active={filter==='academical'} onClick={() => setFilter('academical')} count={counts.academical} />
+          <CategoryChip label="Personal" active={filter==='personal'} onClick={() => setFilter('personal')} count={counts.personal} />
         </div>
       </div>
 
