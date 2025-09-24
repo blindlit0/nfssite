@@ -11,14 +11,13 @@ export type FirebaseServices = {
 
 export function initFirebase(): FirebaseServices | null {
   const config = {
-    apiKey: "AIzaSyBssuCrTf3Olti4Vyz6_IpZmm5TP3JSt70",
-    authDomain: "nfssite-136e9.firebaseapp.com",
-    projectId: "nfssite-136e9",
-    storageBucket: "nfssite-136e9.firebasestorage.app",
-    messagingSenderId: "380712651474",
-    appId: "1:380712651474:web:b31c9411269d85c4b57b0b",
-    measurementId: "G-MD2SPRKHNE",
-  }
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  } as const
 
   const hasConfig = Object.values(config).every((v) => typeof v === 'string' && v.length > 0)
   if (!hasConfig) return null

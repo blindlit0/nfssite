@@ -43,7 +43,7 @@ function Layout() {
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
           <small className="muted">© {new Date().getFullYear()} Department of Food Science & Nutrition</small>
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-            <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn" rel="noreferrer" style={{ display: 'inline-flex' }}>
+            <a href="https://www.linkedin.com/company/nutrition-and-food-science-students-society-nfsss/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BWBLr2tfvT5G%2FLp%2Bf9rwgdA%3D%3D" target="_blank" aria-label="LinkedIn" rel="noreferrer" style={{ display: 'inline-flex' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ color: 'var(--color-primary)' }}>
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.784 1.764-1.75 1.764zm13.5 11.268h-3v-5.604c0-1.337-.025-3.059-1.865-3.059-1.868 0-2.154 1.459-2.154 2.967v5.696h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.839-1.563 3.038 0 3.6 2.001 3.6 4.604v5.592z"/>
               </svg>
