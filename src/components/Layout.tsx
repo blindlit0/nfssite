@@ -1,16 +1,38 @@
+import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 
 function Layout() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <header style={{ borderBottom: '1px solid #e5e5e5', padding: '0.75rem 0' }}>
-        <nav className="container" style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
+        <nav className="container nav" style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <span style={{ fontWeight: 800, color: 'var(--color-primary)' }}>Dept. of Food Science & Nutrition</span>
+          </div>
+          <div className="nav-links" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <NavLink to="/" style={{ textDecoration: 'none' }}>Home</NavLink>
             <NavLink to="/welfare" style={{ textDecoration: 'none' }}>Welfare</NavLink>
           </div>
+          <button className="hamburger" aria-label="Toggle menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((v) => !v)} style={{ background: 'transparent', border: 0, display: 'none' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style={{ color: 'var(--color-primary)' }}>
+              {menuOpen ? (
+                <path d="M18.3 5.71L12 12.01 5.7 5.71 4.29 7.12 10.59 13.42 4.29 19.71 5.7 21.12 12 14.83 18.3 21.12 19.71 19.71 13.41 13.42 19.71 7.12z"/>
+              ) : (
+                <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+              )}
+            </svg>
+          </button>
         </nav>
+        {menuOpen && (
+          <div className="mobile-menu" style={{ borderTop: '1px solid #e5e5e5' }}>
+            <div className="container" style={{ display: 'flex', flexDirection: 'column', padding: '0.75rem 0', gap: '0.5rem' }}>
+              <NavLink to="/" style={{ textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>Home</NavLink>
+              <NavLink to="/welfare" style={{ textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>Welfare</NavLink>
+            </div>
+          </div>
+        )}
       </header>
 
       <main className="container" style={{ flex: 1, padding: '2rem 0' }}>
@@ -27,8 +49,10 @@ function Layout() {
               </svg>
             </a>
             <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" rel="noreferrer" style={{ display: 'inline-flex' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ color: 'var(--color-accent)' }}>
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.35 3.608 1.325.975.975 1.263 2.242 1.325 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.35 2.633-1.325 3.608-.975.975-2.242 1.263-3.608 1.325-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.35-3.608-1.325-.975-.975-1.263-2.242-1.325-3.608C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.062-1.366.35-2.633 1.325-3.608.975-.975 2.242-1.263 3.608-1.325C8.416 2.175 8.796 2.163 12 2.163zm0 1.837c-3.16 0-3.526.012-4.767.069-1.022.047-1.577.216-1.946.36-.49.19-.84.416-1.207.783-.367.367-.594.717-.783 1.207-.144.369-.313.924-.36 1.946-.057 1.241-.069 1.607-.069 4.767s.012 3.526.069 4.767c.047 1.022.216 1.577.36 1.946.19.49.416.84.783 1.207.367.367.717.594 1.207.783.369.144.924.313 1.946.36 1.241.057 1.607.069 4.767.069s3.526-.012 4.767-.069c1.022-.047 1.577-.216 1.946-.36.49-.19.84-.416 1.207-.783.367-.367.594-.717.783-1.207.144-.369.313-.924.36-1.946.057-1.241.069-1.607.069-4.767s-.012-3.526-.069-4.767c-.047-1.022-.216-1.577-.36-1.946-.19-.49-.416-.84-.783-1.207-.367-.367-.717-.594-1.207-.783-.369-.144-.924-.313-1.946-.36-1.241-.057-1.607-.069-4.767-.069zm0 3.905a5.095 5.095 0 1 1 0 10.19 5.095 5.095 0 0 1 0-10.19zm0 1.837a3.258 3.258 0 1 0 0 6.516 3.258 3.258 0 0 0 0-6.516zm5.406-3.204a1.188 1.188 0 1 1 0 2.376 1.188 1.188 0 0 1 0-2.376z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-accent)' }}>
+                <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                <circle cx="12" cy="12" r="3.2"></circle>
+                <path d="M16.5 7.5h.01"></path>
               </svg>
             </a>
           </div>
