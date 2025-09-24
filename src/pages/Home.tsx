@@ -23,7 +23,7 @@ function Home() {
         <ul>
           <li>Academic programs and student resources</li>
           <li>Research initiatives and publications</li>
-          <li>Community outreach and collaborations</li>
+          <li>Community outreach and collaborations bla bla bla</li>
         </ul>
       </div>
     </section>

@@ -31,6 +31,12 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(13, 71, 161, 0.10), transparent 60%),
+    radial-gradient(900px 420px at -10% 30%, rgba(46, 125, 50, 0.10), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 60%, #ffffff 100%);
+  position: relative;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -85,6 +91,39 @@ button:focus-visible {
   color: var(--color-muted);
 }
 
+/* Futuristic subtle grid + glow */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -100px;
+  background:
+    linear-gradient(transparent 97%, rgba(15, 23, 42, 0.05) 0) 0 0 / 24px 24px,
+    linear-gradient(90deg, transparent 97%, rgba(15, 23, 42, 0.05) 0) 0 0 / 24px 24px;
+  pointer-events: none;
+  z-index: -1;
+  mask-image: radial-gradient(520px 520px at 50% 20%, black, transparent 70%);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  width: 520px;
+  height: 520px;
+  left: 62%;
+  top: 10%;
+  translate: -50% -50%;
+  background: radial-gradient(closest-side, rgba(13, 71, 161, 0.18), transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+  animation: nfs-float 12s ease-in-out infinite alternate;
+}
+
+@keyframes nfs-float {
+  from { translate: -50% -50%; transform: scale(1); }
+  to { translate: -48% -52%; transform: scale(1.05); }
+}
+
 /* Responsive navigation */
 .nav .hamburger {
   display: none;
@@ -128,3 +167,40 @@ button:focus-visible {
   background: rgba(13, 71, 161, 0.08);
   color: var(--color-primary);
 }
+
+/* Chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.9rem;
+  background: #fff;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, transform 80ms ease;
+}
+.chip:hover { border-color: rgba(13, 71, 161, 0.4); }
+.chip:active { transform: translateY(1px); }
+.chip.active {
+  background: linear-gradient(135deg, rgba(13, 71, 161, 0.06), rgba(46, 125, 50, 0.06));
+  border-color: rgba(13, 71, 161, 0.35);
+}
+
+/* Inputs */
+input[type="text"], select, textarea {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  width: 100%;
+  background: #fff;
+}
+textarea { resize: vertical; }

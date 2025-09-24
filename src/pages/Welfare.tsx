@@ -93,24 +93,39 @@ function Welfare() {
   }
 
   const filteredPosts = posts.filter((p) => (filter === 'all' ? true : p.category === filter))
+  const counts = useMemo(() => {
+    const base = { financial: 0, emotional: 0, academical: 0, personal: 0 }
+    for (const p of posts) base[p.category] += 1
+    return base
+  }, [posts])
+
+  function CategoryChip({ value, active, onClick, label, count }: { value: Category | 'all'; active: boolean; onClick: () => void; label: string; count?: number }) {
+    return (
+      <button type="button" className={`chip ${active ? 'active' : ''}`} onClick={onClick} aria-pressed={active}>
+        <span>{label}</span>
+        {typeof count === 'number' && <span className="badge" style={{ fontSize: '0.75rem' }}>{count}</span>}
+      </button>
+    )
+  }
 
   return (
     <section>
-      <h1>Welfare</h1>
-      <p className="muted">Share welfare matters. You can post anonymously or with your generated username.</p>
+      <div style={{ marginBottom: '1rem' }}>
+        <h1 style={{ marginBottom: 4 }}>Welfare</h1>
+        <p className="muted">Share welfare matters. Post anonymously or with your generated NFSS username.</p>
+      </div>
 
       <form onSubmit={submitPost} className="card" style={{ margin: '1rem 0' }}>
-        <div style={{ display: 'grid', gap: '0.75rem' }}>
-          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
-            <label>
-              <span style={{ display: 'block', fontSize: '0.9rem' }}>Category</span>
-              <select value={category} onChange={(e) => setCategory(e.target.value as Category)}>
-                <option value="financial">Financial</option>
-                <option value="emotional">Emotional</option>
-                <option value="academical">Academical</option>
-                <option value="personal">Personal</option>
-              </select>
-            </label>
+        <div className="grid" style={{ gap: '0.9rem' }}>
+          <div>
+            <div className="chips" role="group" aria-label="Category">
+              <CategoryChip value="financial" label="Financial" active={category==='financial'} onClick={() => setCategory('financial')} />
+              <CategoryChip value="emotional" label="Emotional" active={category==='emotional'} onClick={() => setCategory('emotional')} />
+              <CategoryChip value="academical" label="Academical" active={category==='academical'} onClick={() => setCategory('academical')} />
+              <CategoryChip value="personal" label="Personal" active={category==='personal'} onClick={() => setCategory('personal')} />
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <input type="checkbox" checked={anonymous} onChange={(e) => setAnonymous(e.target.checked)} />
               Post anonymously
@@ -118,8 +133,8 @@ function Welfare() {
             <span className="badge">{anonymous ? 'Anonymous' : username || 'NFSS-...'}</span>
           </div>
           <label>
-            <span style={{ display: 'block', fontSize: '0.9rem' }}>Your message</span>
-            <textarea required value={text} onChange={(e) => setText(e.target.value)} rows={4} placeholder="Describe the welfare matter..." style={{ width: '100%', padding: '0.75rem', borderRadius: 8, border: '1px solid #e5e7eb' }} />
+            <span style={{ display: 'block', fontSize: '0.9rem', marginBottom: 6 }}>Your message</span>
+            <textarea required value={text} onChange={(e) => setText(e.target.value)} rows={5} placeholder="Describe the welfare matter..." />
           </label>
           <div>
             <button type="submit">Post</button>
@@ -128,22 +143,21 @@ function Welfare() {
         </div>
       </form>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap', margin: '1rem 0' }}>
-        <span className="muted">Filter:</span>
-        <select value={filter} onChange={(e) => setFilter(e.target.value as any)}>
-          <option value="all">All</option>
-          <option value="financial">Financial</option>
-          <option value="emotional">Emotional</option>
-          <option value="academical">Academical</option>
-          <option value="personal">Personal</option>
-        </select>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', margin: '1rem 0' }}>
+        <div className="chips" role="group" aria-label="Filter">
+          <CategoryChip value="all" label="All" active={filter==='all'} onClick={() => setFilter('all')} count={posts.length} />
+          <CategoryChip value="financial" label="Financial" active={filter==='financial'} onClick={() => setFilter('financial')} count={counts.financial} />
+          <CategoryChip value="emotional" label="Emotional" active={filter==='emotional'} onClick={() => setFilter('emotional')} count={counts.emotional} />
+          <CategoryChip value="academical" label="Academical" active={filter==='academical'} onClick={() => setFilter('academical')} count={counts.academical} />
+          <CategoryChip value="personal" label="Personal" active={filter==='personal'} onClick={() => setFilter('personal')} count={counts.personal} />
+        </div>
       </div>
 
       <div className="grid grid-3" style={{ marginTop: '1rem' }}>
         {filteredPosts.map((p) => (
           <article key={p.id} className="card">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <strong style={{ color: 'var(--color-primary)' }}>{p.category}</strong>
+              <strong style={{ color: 'var(--color-primary)', textTransform: 'capitalize' }}>{p.category}</strong>
               <span className="muted" style={{ fontSize: '0.85rem' }}>{p.anonymous ? 'Anonymous' : p.username}</span>
             </div>
             <p style={{ whiteSpace: 'pre-wrap' }}>{p.text}</p>
