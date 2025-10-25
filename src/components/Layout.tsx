@@ -1,19 +1,142 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
 function Layout() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { user, userData, signOut } = useAuth()
+
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+    } catch (error) {
+      console.error('Error signing out:', error)
+    }
+  }
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <header style={{ borderBottom: '1px solid #e5e5e5', padding: '0.75rem 0' }}>
+      <header style={{ 
+        borderBottom: '1px solid rgba(220, 38, 38, 0.1)', 
+        padding: '1rem 0',
+        background: 'rgba(255, 255, 255, 0.8)',
+        backdropFilter: 'blur(10px)'
+      }}>
         <nav className="container nav" style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            <span style={{ fontWeight: 800, color: 'var(--color-primary)' }}>Dept. of Food Science & Nutrition</span>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.2rem',
+              color: 'white',
+              fontWeight: 'bold',
+              marginRight: '0.5rem'
+            }}>
+              NFS
+            </div>
+            <span style={{ fontWeight: 800, color: 'var(--color-primary)', fontSize: '1.1rem' }}>Dept. of Food Science & Nutrition</span>
           </div>
-          <div className="nav-links" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            <NavLink to="/" style={{ textDecoration: 'none' }}>Home</NavLink>
-            <NavLink to="/welfare" style={{ textDecoration: 'none' }}>Welfare</NavLink>
+          <div className="nav-links" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+            <NavLink 
+              to="/" 
+              style={{ 
+                textDecoration: 'none',
+                fontWeight: '500',
+                color: 'var(--color-text)',
+                transition: 'color 200ms ease',
+                padding: '0.5rem 0'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--color-primary)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--color-text)'
+              }}
+            >
+              Home
+            </NavLink>
+            <NavLink 
+              to="/welfare" 
+              style={{ 
+                textDecoration: 'none',
+                fontWeight: '500',
+                color: 'var(--color-text)',
+                transition: 'color 200ms ease',
+                padding: '0.5rem 0'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--color-primary)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--color-text)'
+              }}
+            >
+              Welfare
+            </NavLink>
+            {user ? (
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <div style={{
+                  padding: '0.5rem 1rem',
+                  background: 'rgba(22, 163, 74, 0.1)',
+                  borderRadius: '20px',
+                  border: '1px solid rgba(22, 163, 74, 0.2)'
+                }}>
+                  <span style={{ fontSize: '0.9rem', color: 'var(--color-accent)', fontWeight: '600' }}>
+                    {userData?.nfsUsername || user.displayName || user.email}
+                  </span>
+                </div>
+                <button 
+                  onClick={handleSignOut}
+                  style={{
+                    background: 'transparent',
+                    color: 'var(--color-primary)',
+                    border: '2px solid var(--color-primary)',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '8px',
+                    fontSize: '0.9rem',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    transition: 'all 200ms ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'var(--color-primary)'
+                    e.currentTarget.style.color = '#fff'
+                    e.currentTarget.style.transform = 'translateY(-1px)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent'
+                    e.currentTarget.style.color = 'var(--color-primary)'
+                    e.currentTarget.style.transform = 'translateY(0)'
+                  }}
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <NavLink 
+                to="/login" 
+                style={{ 
+                  textDecoration: 'none',
+                  fontWeight: '500',
+                  color: 'var(--color-text)',
+                  transition: 'color 200ms ease',
+                  padding: '0.5rem 0'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--color-primary)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text)'
+                }}
+              >
+                Login
+              </NavLink>
+            )}
           </div>
           <button className="hamburger" aria-label="Toggle menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((v) => !v)} style={{ background: 'transparent', border: 0, display: 'none' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style={{ color: 'var(--color-primary)' }}>
@@ -26,10 +149,85 @@ function Layout() {
           </button>
         </nav>
         {menuOpen && (
-          <div className="mobile-menu" style={{ borderTop: '1px solid #e5e5e5' }}>
-            <div className="container" style={{ display: 'flex', flexDirection: 'column', padding: '0.75rem 0', gap: '0.5rem' }}>
-              <NavLink to="/" style={{ textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>Home</NavLink>
-              <NavLink to="/welfare" style={{ textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>Welfare</NavLink>
+          <div className="mobile-menu" style={{ 
+            borderTop: '1px solid rgba(220, 38, 38, 0.1)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <div className="container" style={{ display: 'flex', flexDirection: 'column', padding: '1rem 0', gap: '0.75rem' }}>
+              <NavLink 
+                to="/" 
+                style={{ 
+                  textDecoration: 'none',
+                  fontWeight: '500',
+                  color: 'var(--color-text)',
+                  padding: '0.5rem 0'
+                }} 
+                onClick={() => setMenuOpen(false)}
+              >
+                Home
+              </NavLink>
+              <NavLink 
+                to="/welfare" 
+                style={{ 
+                  textDecoration: 'none',
+                  fontWeight: '500',
+                  color: 'var(--color-text)',
+                  padding: '0.5rem 0'
+                }} 
+                onClick={() => setMenuOpen(false)}
+              >
+                Welfare
+              </NavLink>
+              {user ? (
+                <>
+                  <div style={{
+                    padding: '0.75rem',
+                    background: 'rgba(22, 163, 74, 0.1)',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(22, 163, 74, 0.2)',
+                    margin: '0.5rem 0'
+                  }}>
+                    <span style={{ fontSize: '0.9rem', color: 'var(--color-accent)', fontWeight: '600' }}>
+                      {userData?.nfsUsername || user.displayName || user.email}
+                    </span>
+                  </div>
+                  <button 
+                    onClick={() => {
+                      handleSignOut()
+                      setMenuOpen(false)
+                    }}
+                    style={{
+                      background: 'transparent',
+                      color: 'var(--color-primary)',
+                      border: '2px solid var(--color-primary)',
+                      padding: '0.75rem 1rem',
+                      borderRadius: '8px',
+                      fontSize: '0.9rem',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 200ms ease',
+                      textAlign: 'left',
+                      width: 'fit-content'
+                    }}
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <NavLink 
+                  to="/login" 
+                  style={{ 
+                    textDecoration: 'none',
+                    fontWeight: '500',
+                    color: 'var(--color-text)',
+                    padding: '0.5rem 0'
+                  }} 
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Login
+                </NavLink>
+              )}
             </div>
           </div>
         )}
@@ -39,7 +237,13 @@ function Layout() {
         <Outlet />
       </main>
 
-      <footer style={{ borderTop: '1px solid #e5e5e5', padding: '1rem 0', marginTop: 'auto' }}>
+      <footer style={{ 
+        borderTop: '1px solid rgba(220, 38, 38, 0.1)', 
+        padding: '1.5rem 0', 
+        marginTop: 'auto',
+        background: 'rgba(255, 255, 255, 0.8)',
+        backdropFilter: 'blur(10px)'
+      }}>
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
           <small className="muted">© {new Date().getFullYear()} Department of Food Science & Nutrition</small>
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
