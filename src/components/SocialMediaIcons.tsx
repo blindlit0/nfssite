@@ -15,7 +15,7 @@ const SocialMediaIcons = () => {
           </svg>
         </li>
         </Link>
-        <Link href="https://www.linkedin.com/in/your-profile" passHref>
+        <Link href="https://www.linkedin.com/company/nutrition-and-food-science-students-society-nfsss/posts/?feedView=all" passHref>
           <li className="icon linkedin">
             <span className="tooltip">LinkedIn</span>
             <svg viewBox="0 0 448 512" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

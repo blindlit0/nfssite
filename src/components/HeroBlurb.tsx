@@ -44,13 +44,6 @@ export default function HeroBlurb() {
                 Create a Post
               </Link>
 
-              <Link
-                href="/events"
-                className="border border-white/20 text-white px-6 py-3 rounded-xl hover:bg-white hover:text-black transition duration-300"
-              >
-                See Events
-              </Link>
-
             </div>
 
           </div>

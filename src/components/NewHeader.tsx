@@ -82,11 +82,16 @@ export default function NewHeader() {
                 Updates
                 </button>
               </Link>
+
+            {/*<button className="border border-white px-6 py-3 rounded-xl hover:bg-white hover:text-black transition duration-300">
+              Submit Concern
+            </button>*/}
+
           </div>
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="w-full max-w-[550px]">
+        {/*<div className="w-full max-w-[550px]">
           <div className="bg-[#7b9620] rounded-sm h-[420px] flex items-start justify-start p-6 relative overflow-hidden">
 
             <div className="bg-white text-black px-4 py-2 text-sm rounded shadow-md">
@@ -95,7 +100,7 @@ export default function NewHeader() {
 
           </div>
         </div>
-
+          */}
       </div>
     </section>
   </header>

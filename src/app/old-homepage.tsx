@@ -224,7 +224,7 @@ import InteractiveGrid from '@/components/Pattern';
  
              <div className="card">
  
-              <h4 className="font-semibold mb-3 text-slate-900">Meet the team</h4>
+              <h4 className="font-semibold mb-3 text-slate-900">Meet the teams</h4>
  
               <MemberCarousel members={sampleMembers} />
  

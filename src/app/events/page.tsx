@@ -85,20 +85,14 @@ const EventsPage = () => {
           </h1>
 
           <p className="mt-8 max-w-3xl mx-auto text-lg md:text-xl text-gray-200 leading-relaxed">
-            Stay informed about welfare activities, student support
-            initiatives, programs, and general events within the department.
+            Stay informed about welfare activities, programs, and general events within the department.
           </p>
 
         </div>
 
       </section>
 
-      {/* FEATURED EVENTS */}
-      <section className="w-full bg-white">
-
-        <FEvent />
-
-      </section>
+      
 
 
       {/* SMALL NEWS SECTION */}
@@ -129,29 +123,11 @@ const EventsPage = () => {
               </div>
 
               <h3 className="text-2xl font-bold text-white">
-                Food Donations Received
+                Resuming
               </h3>
 
               <p className="mt-4 text-gray-400 leading-relaxed">
-                Students and staff contributed supplies
-                for the upcoming food support initiative.
-              </p>
-
-            </article>
-
-            <article className="bg-white/5 border border-white/10 rounded-[2rem] p-8 backdrop-blur-sm">
-
-              <div className="text-sm uppercase tracking-widest text-gray-400 mb-4">
-                Community
-              </div>
-
-              <h3 className="text-2xl font-bold text-white">
-                Wellness Talk Held
-              </h3>
-
-              <p className="mt-4 text-gray-400 leading-relaxed">
-                A student wellness discussion focused on
-                stress management and mental wellbeing.
+                The very short vacation has ended. Welcome back to campus, everyone! And all the best.
               </p>
 
             </article>
@@ -176,6 +152,13 @@ const EventsPage = () => {
           </div>
 
         </div>
+
+      </section>
+
+      {/* FEATURED EVENTS */}
+      <section className="w-full bg-white">
+
+        <FEvent />
 
       </section>
 
