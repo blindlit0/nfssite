@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils'; 
 
 import Welcome from './Welcome';
-
+import Link from 'next/link';
 export default function NewHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -75,15 +75,13 @@ export default function NewHeader() {
             Our welfare team is here to support your wellbeing and
             academic success.
           </p>
-
-          <div className="mt-10 flex flex-wrap gap-4">
-            <button className="bg-black text-white px-6 py-3 rounded-xl hover:scale-105 transition duration-300">
-              Meet The Team
-            </button>
-
-            <button className="border border-white px-6 py-3 rounded-xl hover:bg-white hover:text-black transition duration-300">
-              Submit Concern
-            </button>
+      
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link href="/events">
+                <button className="bg-black text-white px-6 py-3 rounded-xl hover:scale-105 transition duration-300">
+                Updates
+                </button>
+              </Link>
           </div>
         </div>
 
