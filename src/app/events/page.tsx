@@ -135,16 +135,15 @@ const EventsPage = () => {
             <article className="bg-white/5 border border-white/10 rounded-[2rem] p-8 backdrop-blur-sm">
 
               <div className="text-sm uppercase tracking-widest text-gray-400 mb-4">
-                Announcement
+                Nothing Much
               </div>
 
               <h3 className="text-2xl font-bold text-white">
-                Committee Meeting Next Week
+                Exactly That, Nothing Much
               </h3>
 
               <p className="mt-4 text-gray-400 leading-relaxed">
-                Welfare committee executives will meet
-                to discuss upcoming student initiatives.
+                Bla bla bla
               </p>
 
             </article>
