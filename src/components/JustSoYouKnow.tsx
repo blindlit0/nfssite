@@ -14,7 +14,7 @@ export default function JustSoYouKnow() {
     async function fetchQuote() {
       try {
         const response = await fetch(
-          "https://opensheet.elk.sh/1IpDZ_V73Z5VkM30GcLWsCxHI4HRp-2eEP9q2NlYK_Uo/Sheet1"
+          "https://opensheet.elk.sh/1IpDZ_V73Z5VkM30GcLWsCxHI4HRp-2eEP9q2NlYK_Uo/Quotes"
         );
 
         const data: Quote[] = await response.json();

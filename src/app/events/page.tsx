@@ -26,10 +26,37 @@ const EventsPage = () => {
 
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+  const [news, setNews] = useState<any[]>([]);
+  const [newsLoading, setNewsLoading] = useState(true);
 
   useEffect(() => {
     const firebaseServices = initFirebase();
     setFirebase(firebaseServices);
+  }, []);
+
+  useEffect(() => {
+    async function fetchNews() {
+      try {
+        const response = await fetch(
+          "https://opensheet.elk.sh/1IpDZ_V73Z5VkM30GcLWsCxHI4HRp-2eEP9q2NlYK_Uo/News"
+        );
+
+        const data = await response.json();
+
+        const sortedNews = [...data].sort(
+          (a, b) => Number(a.priority || 999) - Number(b.priority || 999)
+        );
+
+        setNews(sortedNews);
+
+      } catch (error) {
+        console.error("Failed to fetch news:", error);
+      }
+
+      setNewsLoading(false);
+    }
+
+    fetchNews();
   }, []);
 
   const fetchEvents = async () => {
@@ -59,6 +86,8 @@ const EventsPage = () => {
       fetchEvents();
     }
   }, [firebase]);
+
+  
 
   if (loading) {
     return (
@@ -116,39 +145,46 @@ const EventsPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <article className="bg-white/5 border border-white/10 rounded-[2rem] p-8 backdrop-blur-sm">
+            {newsLoading ? (
 
-              <div className="text-sm uppercase tracking-widest text-gray-400 mb-4">
-                Welfare
+              <div className="col-span-full text-center text-gray-500">
+                Loading updates...
               </div>
 
-              <h3 className="text-2xl font-bold text-white">
-                Resuming
-              </h3>
+            ) : news.length > 0 ? (
 
-              <p className="mt-4 text-gray-400 leading-relaxed">
-                The very short vacation has ended. Welcome back to campus, everyone! And all the best.
-              </p>
+              news.map((item, index) => (
 
-            </article>
+                <article
+                  key={index}
+                  className="bg-white/5 border border-white/10 rounded-[2rem] p-8 backdrop-blur-sm hover:bg-white/10 transition duration-300"
+                >
 
-            <article className="bg-white/5 border border-white/10 rounded-[2rem] p-8 backdrop-blur-sm">
+                  <div className="text-sm uppercase tracking-widest text-gray-400 mb-4">
+                    {item.category}
+                  </div>
 
-              <div className="text-sm uppercase tracking-widest text-gray-400 mb-4">
-                Nothing Much
+                  <h3 className="text-2xl font-bold text-white">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-4 text-gray-400 leading-relaxed">
+                    {item.content}
+                  </p>
+
+                </article>
+
+              ))
+
+            ) : (
+
+              <div className="col-span-full text-center text-gray-500">
+                No updates available.
               </div>
 
-              <h3 className="text-2xl font-bold text-white">
-                Exactly That, Nothing Much
-              </h3>
+            )}
 
-              <p className="mt-4 text-gray-400 leading-relaxed">
-                Bla bla bla
-              </p>
-
-            </article>
-
-          </div>
+</div>
 
         </div>
 
