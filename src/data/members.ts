@@ -40,11 +40,11 @@ export const sampleMembers: Member[] = [
   
   { id: '15', name: 'Shadrach Adotey Vanderpuije', course: 'Nutrition Single Major', year: '300', phone: '0257045385', bio: 'Research and Trends Officer', photoUrl: '/shadrach.jpg' },
 
-  { id: '16', name: 'Constance Akweley Korkoi Larmie', course: 'Nutrition Single Major', year: '200', phone: '0271618152', bio: 'Assistant General Secretary', photoUrl: '' },
+  { id: '16', name: 'Constance Akweley Korkoi Larmie', course: 'Nutrition Single Major', year: '200', phone: '0271618152', bio: 'Assistant General Secretary', photoUrl: '/Constance.jpg' },
 
   { id: '17', name: 'Rhoda Dzifa Awu', course: 'Nutrition Single Major', year: '200', phone: '0504801276', bio: 'Logistics Officer', photoUrl: '' },
 
   { id: '18', name: 'Lokko Daniel Amarlai', course: 'Food Science Single Major', year: '200', phone: '0592072858', bio: 'Birthday and Celebration Officer', photoUrl: '' },
 
-  { id: '19', name: 'Michelle Oduro Twum-Barimah', course: 'Nutrition Single Major', year: '200', phone: '0204068420', bio: 'Member Welfare and Support Officer', photoUrl: '' }
+  { id: '19', name: 'Michelle Oduro Twum-Barimah', course: 'Nutrition Single Major', year: '200', phone: '0204068420', bio: 'Member Welfare and Support Officer', photoUrl: '/Michelle.jpg' }
 ]
