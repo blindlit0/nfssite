@@ -552,8 +552,8 @@ function Welfare() {
           </h3>
 
           <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
-            Your welfare submissions are confidential
-            and only visible to the site administrator.
+            Your submissions to the committee are confidential
+            and only visible to the site administrators.
             The welfare committee will review your concern
             and provide appropriate support where possible.
           </p>
