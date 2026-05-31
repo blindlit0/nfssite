@@ -371,7 +371,7 @@ function Welfare() {
               type="submit"
               className="bg-black text-white px-8 py-4 rounded-2xl hover:scale-105 transition duration-300 shadow-xl"
             >
-              Submit Concern
+              Submit
             </button>
 
           </div>
