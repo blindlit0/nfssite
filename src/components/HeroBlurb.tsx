@@ -12,7 +12,7 @@ export default function HeroBlurb() {
         <div className="rounded-[2rem] border border-white/10 bg-[#0f0f0f] p-8 md:p-14 shadow-2xl relative overflow-hidden">
 
           {/* subtle background glow */}
-          <div className="absolute -top-40 -right-20 w-64 h-64 bg-[#8aa52b]/20 rounded-full blur-3xl" />
+          <div className="absolute -top-40 -right-20 w-96 h-96 bg-[#8aa52b]/20 rounded-full blur-3xl" />
 
           <div className="relative z-10 max-w-4xl mx-auto text-center">
 

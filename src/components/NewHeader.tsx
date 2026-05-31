@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils'; 
 
-import Welcome from './Welcome';
 import Link from 'next/link';
 export default function NewHeader() {
   const [isOpen, setIsOpen] = useState(false);
